@@ -2,14 +2,15 @@ from django.db import models
 from django.conf.locale import LANG_INFO
 from django.db import transaction
 
-LANGUAGES = tuple([
+
+LANGUAGE_CHOICE = tuple([
     (k, v['name']) for k, v in LANG_INFO.items() if v.get('name')
 ])
 
 
 class Dataset(models.Model):
     name = models.CharField(max_length=255, unique=True)
-    language = models.CharField(max_length=7, choices=LANGUAGES)
+    language = models.CharField(max_length=7, choices=LANGUAGE_CHOICE)
 
     @staticmethod
     @transaction.atomic
